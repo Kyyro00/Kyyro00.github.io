@@ -3,8 +3,10 @@ body {
 	font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 2rem;
-	background: #2A7B9B;
-	background: linear-gradient(167deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+	background: #8BDEDA;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #EF9393, #E17DC2, #998EE0, #43ADD0, #8BDEDA);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #EF9393, #E17DC2, #998EE0, #43ADD0, #8BDEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	color: #84009e;
 	text-align: center;
 }
