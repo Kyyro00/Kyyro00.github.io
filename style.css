@@ -20,9 +20,6 @@ body {
 h1 {
   font-size: 6rem;
   text-align: center;
-  opacity: 0;
-  transform: translateY(-50px);
-  animation: aparecer 1s forwards;
 }
 
 .subtitulo {
