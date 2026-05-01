@@ -5,9 +5,17 @@
   if (!container) return;
 
   const floats = Array.from(container.querySelectorAll('.floating'));
+  const items = floats.map((el) => ({
+    el,
+    depth: parseFloat(el.dataset.depth) || 0.08,
+    lastTx: null,
+    lastTy: null,
+    lastRot: null,
+  }));
   const infoTitle = document.getElementById('galleryInfoTitle');
   const infoText = document.getElementById('galleryInfoText');
   let infoHideTimer = null;
+  let rafId = null;
 
   function swapWithFade(el, nextValue) {
     if (!el || typeof nextValue !== 'string') return;
@@ -55,6 +63,7 @@
   let pointerX = 0, pointerY = 0;
   let targetX = 0, targetY = 0;
   let width = window.innerWidth, height = window.innerHeight;
+  let idleFrames = 0;
 
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const lerp = (a, b, n) => a + (b - a) * n;
@@ -67,6 +76,7 @@
     // center-relative coordinates
     pointerX = x - width / 2;
     pointerY = y - height / 2;
+    startLoop();
   }
 
   // pointer + touch
@@ -80,22 +90,57 @@
     });
   }
 
-  // animation loop with smoothing
+  function startLoop() {
+    if (rafId !== null) return;
+    idleFrames = 0;
+    rafId = requestAnimationFrame(animate);
+  }
+
+  // animation loop with smoothing and auto-pause when idle
   function animate() {
     // smooth target follow
-    targetX = lerp(targetX, pointerX, 0.08);
-    targetY = lerp(targetY, pointerY, 0.08);
+    targetX = lerp(targetX, pointerX, 0.1);
+    targetY = lerp(targetY, pointerY, 0.1);
 
-    floats.forEach(el => {
-      const depth = parseFloat(el.dataset.depth) || 0.08;
-      const tx = clamp(targetX * depth, -120, 120);
-      const ty = clamp(targetY * depth, -120, 120);
-      const rot = (tx / 100) * (depth * 6);
-      el.style.transform = `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rot}deg)`;
+    let changed = false;
+
+    items.forEach((item) => {
+      const tx = clamp(targetX * item.depth, -120, 120);
+      const ty = clamp(targetY * item.depth, -120, 120);
+      const rot = (tx / 100) * (item.depth * 6);
+
+      const isFirstPaint = item.lastTx === null || item.lastTy === null || item.lastRot === null;
+      const moved = isFirstPaint || Math.abs(tx - item.lastTx) > 0.15 || Math.abs(ty - item.lastTy) > 0.15 || Math.abs(rot - item.lastRot) > 0.03;
+      if (!moved) return;
+
+      changed = true;
+      item.lastTx = tx;
+      item.lastTy = ty;
+      item.lastRot = rot;
+      item.el.style.transform = `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rot}deg)`;
     });
 
-    requestAnimationFrame(animate);
+    if (changed) {
+      idleFrames = 0;
+    } else {
+      idleFrames += 1;
+    }
+
+    // stop loop after short idle period to reduce CPU/GPU usage
+    if (idleFrames > 18) {
+      rafId = null;
+      return;
+    }
+
+    rafId = requestAnimationFrame(animate);
   }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  });
 
   // initialize
   floats.forEach((el) => {
@@ -120,6 +165,6 @@
   });
 
   reveal();
-  animate();
+  startLoop();
 })();
 
