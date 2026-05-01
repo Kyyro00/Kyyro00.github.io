@@ -2,8 +2,7 @@ body {
   margin: 0;
   font-family: Arial;
   background: #8BDEDA;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #EF9393, #E17DC2, #998EE0, #43ADD0, #8BDEDA);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #EF9393, #E17DC2, #998EE0, #43ADD0, #8BDEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: linear-gradient(to left bottom, #5e0036, #531c4c, #432e5a, #333a5f, #2b435e, #2a435e, #29425d, #28425d, #2d395e, #3a2d5a, #491c4e, #55003b);
   color: white;
 }
 
@@ -30,13 +29,13 @@ body {
 .navbar-logo {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #00c6ff;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .navbar-logo:hover {
-  color: #00e5ff;
+  color: #a200ff;
 }
 
 .nav-menu {
@@ -54,13 +53,13 @@ body {
 }
 
 .nav-link:hover {
-  background: rgba(0, 198, 255, 0.2);
-  border-bottom-color: #00c6ff;
+  background: rgba(54, 0, 90, 0.719);
+  border-bottom-color: #49005f;
 }
 
 .nav-link.active {
-  border-bottom-color: #00c6ff;
-  color: #00c6ff;
+  border-bottom-color: #ff00ff;
+  color: #6500a0;
 }
 
 .hero {
