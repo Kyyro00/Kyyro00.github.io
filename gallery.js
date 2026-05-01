@@ -1,65 +1,59 @@
-// Mouse-reactive floating gallery script
+// Mouse-reactive floating gallery (smoothed, pointer + touch)
 
 (() => {
-      const container = document.getElementById('galleryInner');
-      if (!container) return;
+  const container = document.getElementById('galleryInner');
+  if (!container) return;
 
-      const floats = Array.from(container.querySelectorAll('.floating'));
+  const floats = Array.from(container.querySelectorAll('.floating'));
 
-      let mouseX = 0, mouseY = 0;
-      let winW = window.innerWidth, winH = window.innerHeight;
+  // state
+  let pointerX = 0, pointerY = 0;
+  let targetX = 0, targetY = 0;
+  let width = window.innerWidth, height = window.innerHeight;
 
-      window.addEventListener('resize', () => { winW = window.innerWidth; winH = window.innerHeight; });
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const lerp = (a, b, n) => a + (b - a) * n;
 
-      window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX - winW / 2;
-            mouseY = e.clientY - winH / 2;
-      });
+  window.addEventListener('resize', () => { width = window.innerWidth; height = window.innerHeight; });
 
-      // gentle follow using requestAnimationFrame
-      function render() {
-            floats.forEach(el => {
-                  const depth = parseFloat(el.dataset.depth) || 0.08;
-                  const tx = mouseX * depth;
-                  const ty = mouseY * depth;
-                  const rotate = tx * 0.02;
-                  el.style.transform = `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rotate}deg)`;
-            });
-            requestAnimationFrame(render);
-      }
+  function onPointer(e) {
+    const x = (e.clientX ?? e.touches?.[0]?.clientX) ?? width/2;
+    const y = (e.clientY ?? e.touches?.[0]?.clientY) ?? height/2;
+    // center-relative coordinates
+    pointerX = x - width / 2;
+    pointerY = y - height / 2;
+  }
 
-      // initial minor animation loop to keep floating feeling
-      floats.forEach((el, i) => {
-            const delay = (i % 3) * 300;
-            el.style.transition = 'transform 220ms linear';
-            setTimeout(() => {
-                  el.style.transition = 'transform 160ms linear';
-            }, delay);
-      });
+  // pointer + touch
+  window.addEventListener('pointermove', onPointer, { passive: true });
+  window.addEventListener('touchmove', onPointer, { passive: true });
 
-      render();
+  // show entrance
+  function reveal() {
+    floats.forEach((el, i) => {
+      setTimeout(() => el.classList.add('show'), i * 80);
+    });
+  }
+
+  // animation loop with smoothing
+  function animate() {
+    // smooth target follow
+    targetX = lerp(targetX, pointerX, 0.08);
+    targetY = lerp(targetY, pointerY, 0.08);
+
+    floats.forEach(el => {
+      const depth = parseFloat(el.dataset.depth) || 0.08;
+      const tx = clamp(targetX * depth, -120, 120);
+      const ty = clamp(targetY * depth, -120, 120);
+      const rot = (tx / 100) * (depth * 6);
+      el.style.transform = `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rot}deg)`;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  // initialize
+  reveal();
+  animate();
 })();
-// Gallery specific scripts
-
-window.onmousemove = e => {
-  const mouseX = e.clientX,
-        mouseY = e.clientY;
-  
-  const xDecimal = mouseX / window.innerWidth,
-        yDecimal = mouseY / window.innerHeight;
-  
-  const maxX = gallery.offsetWidth - window.innerWidth,
-        maxY = gallery.offsetHeight - window.innerHeight;
-  
-  const panX = maxX * xDecimal * -1,
-        panY = maxY * yDecimal * -1;
-  
-  gallery.animate({
-    transform: `translate(${panX}px, ${panY}px)`
-  }, {
-    duration: 4000,
-    fill: "forwards",
-    easing: "ease"
-  })
-}ery specific scripts
 

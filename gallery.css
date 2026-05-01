@@ -57,3 +57,16 @@
   .floating img { width: 220px; }
 }
 
+/* subtle entrance animation */
+.floating { opacity: 0; transform-origin: center; transition: opacity 600ms ease, transform 600ms cubic-bezier(.2,.9,.2,1); }
+.floating.show { opacity: 1; }
+
+/* small helper for accessible layout fallback */
+.gallery-fallback {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+}
+
