@@ -1,19 +1,27 @@
 const btn = document.getElementById("btn");
 btn.addEventListener("click", () => {
-  document.body.style.background = "linear-gradient(135deg, #ff512f, #dd2476)";
-
   let reveal = document.getElementById("reveal-text");
   if (!reveal) {
     reveal = document.createElement("p");
     reveal.id = "reveal-text";
     reveal.className = "reveal-text";
-    reveal.textContent = "Mi promera web con efectos";
-    document.querySelector(".hero").appendChild(reveal);
+    reveal.textContent = "página en servicio, espera a la próxima actualización";
+    const normalText = document.querySelector(".normal-text");
+    const hero = document.querySelector(".hero");
+    if (normalText && hero) {
+      hero.insertBefore(reveal, normalText);
+    } else if (hero) {
+      hero.appendChild(reveal);
+    }
     requestAnimationFrame(() => {
       reveal.classList.add("is-visible");
     });
+    return;
   }
+
+  reveal.remove();
 });
+
 const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
 
