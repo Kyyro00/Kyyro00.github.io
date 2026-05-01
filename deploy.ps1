@@ -41,7 +41,7 @@ Write-Output "Despliegue completado. Abriendo site..."
 Start-Process "https://Kyyro00.github.io"
 
 Write-Output "La página ya se actualizó. Tiempo restante para ver el cambio:"
-for ($remaining = 60; $remaining -ge 1; $remaining--) {
+for ($remaining = 120; $remaining -ge 1; $remaining--) {
   Write-Host ("Tiempo restante: {0} segundos" -f $remaining) -NoNewline
   Start-Sleep -Seconds 1
   Write-Host "`r" -NoNewline
