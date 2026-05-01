@@ -8,7 +8,7 @@
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
-<body>
+<body class="gallery-page">
   <nav class="navbar">
     <div class="navbar-container">
       <a href="index.html" class="navbar-logo">Kyyro00</a>
@@ -26,13 +26,18 @@
     <!-- Mouse-Reactive Floating Image Gallery -->
     <div class="gallery">
       <div class="gallery-inner" id="galleryInner">
-        <div class="floating" data-depth="0.08"><img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1b2f6b9d1ef2a2b4f4f6e2c3a4b8c9d0" alt="img1"></div>
-        <div class="floating" data-depth="0.12"><img src="https://images.unsplash.com/photo-1494475673543-6cf5e1abf5f0?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2d4f6a7b8c9d0e1f2a3b4c5d6e7f8a9b" alt="img2"></div>
-        <div class="floating" data-depth="0.06"><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3e5f6a7b8c9d0e1f2a3b4c5d6e7f8b0c" alt="img3"></div>
-        <div class="floating" data-depth="0.16"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=4f6a7b8c9d0e1f2a3b4c5d6e7f8b0c1d" alt="img4"></div>
-        <div class="floating" data-depth="0.1"><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d" alt="img5"></div>
-        <div class="floating" data-depth="0.04"><img src="https://images.unsplash.com/photo-1438979315413-de5df30042a1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e" alt="img6"></div>
+        <div class="floating" data-depth="0.08" data-title="Paisaje Urbano" data-description="Una escena de ciudad con luz natural y mucho detalle en arquitectura." tabindex="0"><img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1b2f6b9d1ef2a2b4f4f6e2c3a4b8c9d0" alt="Paisaje urbano"></div>
+        <div class="floating" data-depth="0.12" data-title="Color y Textura" data-description="Composicion con enfoque en color, contraste y formas organicas." tabindex="0"><img src="https://images.unsplash.com/photo-1494475673543-6cf5e1abf5f0?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2d4f6a7b8c9d0e1f2a3b4c5d6e7f8a9b" alt="Color y textura"></div>
+        <div class="floating" data-depth="0.06" data-title="Horizonte" data-description="Vista abierta con profundidad y tonos frios para un efecto calmado." tabindex="0"><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3e5f6a7b8c9d0e1f2a3b4c5d6e7f8b0c" alt="Horizonte"></div>
+        <div class="floating" data-depth="0.16" data-title="Luz Dorada" data-description="Fotografia con iluminacion calida para resaltar volumen y color." tabindex="0"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=4f6a7b8c9d0e1f2a3b4c5d6e7f8b0c1d" alt="Luz dorada"></div>
+        <div class="floating" data-depth="0.1" data-title="Profundidad" data-description="Plano medio con detalle suave y separacion visual del fondo." tabindex="0"><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d" alt="Profundidad"></div>
+        <div class="floating" data-depth="0.04" data-title="Naturaleza" data-description="Escena natural que aporta equilibrio visual y sensacion de aire libre." tabindex="0"><img src="https://images.unsplash.com/photo-1438979315413-de5df30042a1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e" alt="Naturaleza"></div>
       </div>
+    </div>
+
+    <div class="gallery-info" id="galleryInfo" aria-live="polite">
+      <h3 id="galleryInfoTitle">Haz clic en una imagen</h3>
+      <p id="galleryInfoText">Aparecera aqui su informacion.</p>
     </div>
   </section>
 

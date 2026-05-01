@@ -1,8 +1,20 @@
 /* Gallery specific styles - spread floating gallery, no dark overlay */
 
+.gallery-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.gallery-page .content {
+  min-height: 0;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
 .gallery {
-  position: absolute;
-  top: 100;
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -13,6 +25,11 @@
   padding: 0;
   margin: 0;
   z-index: 0;
+}
+
+.navbar {
+  position: relative;
+  z-index: 3;
 }
 
 .gallery-inner {
@@ -28,6 +45,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   will-change: transform;
+  cursor: pointer;
 }
 
 .floating img {
@@ -68,6 +86,35 @@
 /* subtle entrance animation */
 .floating { opacity: 0; transform-origin: center; transition: opacity 600ms ease, transform 600ms cubic-bezier(.2,.9,.2,1); }
 .floating.show { opacity: 1; }
+
+.gallery-info {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  width: min(92vw, 800px);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  z-index: 4;
+  backdrop-filter: blur(8px);
+}
+
+.gallery-info h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  --animate-duration: 320ms;
+}
+
+.gallery-info p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  --animate-duration: 320ms;
+}
 
 /* small helper for accessible layout fallback */
 .gallery-fallback {

@@ -5,6 +5,51 @@
   if (!container) return;
 
   const floats = Array.from(container.querySelectorAll('.floating'));
+  const infoTitle = document.getElementById('galleryInfoTitle');
+  const infoText = document.getElementById('galleryInfoText');
+  let infoHideTimer = null;
+
+  function swapWithFade(el, nextValue) {
+    if (!el || typeof nextValue !== 'string') return;
+    if (el.textContent === nextValue) return;
+
+    el.classList.remove('animate__fadeOut');
+    el.classList.remove('animate__fadeIn');
+    el.classList.add('animate__animated', 'animate__fadeOut');
+
+    const handleFadeOutEnd = () => {
+      el.removeEventListener('animationend', handleFadeOutEnd);
+      el.textContent = nextValue;
+      el.classList.remove('animate__fadeOut');
+      el.classList.add('animate__fadeIn');
+
+      const handleFadeInEnd = () => {
+        el.removeEventListener('animationend', handleFadeInEnd);
+        el.classList.remove('animate__fadeIn');
+      };
+
+      el.addEventListener('animationend', handleFadeInEnd, { once: true });
+    };
+
+    el.addEventListener('animationend', handleFadeOutEnd, { once: true });
+  }
+
+  function hideInfoWithFade() {
+    [infoTitle, infoText].forEach((el) => {
+      if (!el || !el.textContent.trim()) return;
+
+      el.classList.remove('animate__fadeIn');
+      el.classList.add('animate__animated', 'animate__fadeOut');
+
+      const handleFadeOutEnd = () => {
+        el.removeEventListener('animationend', handleFadeOutEnd);
+        el.textContent = '';
+        el.classList.remove('animate__fadeOut');
+      };
+
+      el.addEventListener('animationend', handleFadeOutEnd, { once: true });
+    });
+  }
 
   // state
   let pointerX = 0, pointerY = 0;
@@ -53,6 +98,27 @@
   }
 
   // initialize
+  floats.forEach((el) => {
+    const setInfo = () => {
+      if (!infoTitle || !infoText) return;
+      swapWithFade(infoTitle, el.dataset.title || 'Imagen');
+      swapWithFade(infoText, el.dataset.description || 'Sin descripcion disponible.');
+
+      if (infoHideTimer) clearTimeout(infoHideTimer);
+      infoHideTimer = setTimeout(() => {
+        hideInfoWithFade();
+      }, 10000);
+    };
+
+    el.addEventListener('click', setInfo);
+    el.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        setInfo();
+      }
+    });
+  });
+
   reveal();
   animate();
 })();
