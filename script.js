@@ -1,5 +1,6 @@
 const btn = document.getElementById("btn");
-btn.addEventListener("click", () => {
+
+function createRevealText() {
   let reveal = document.getElementById("reveal-text");
   if (!reveal) {
     reveal = document.createElement("p");
@@ -16,11 +17,31 @@ btn.addEventListener("click", () => {
     requestAnimationFrame(() => {
       reveal.classList.add("is-visible");
     });
+  }
+}
+
+function removeRevealText() {
+  let reveal = document.getElementById("reveal-text");
+  if (reveal) {
+    reveal.remove();
+  }
+}
+
+btn.addEventListener("click", () => {
+  let reveal = document.getElementById("reveal-text");
+  if (!reveal) {
+    createRevealText();
+    localStorage.setItem("revealTextVisible", "true");
     return;
   }
 
-  reveal.remove();
+  removeRevealText();
+  localStorage.setItem("revealTextVisible", "false");
 });
+
+if (localStorage.getItem("revealTextVisible") === "true") {
+  createRevealText();
+}
 
 const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
