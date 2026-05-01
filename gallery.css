@@ -1,8 +1,8 @@
 /* Gallery specific styles - spread floating gallery, no dark overlay */
 
 .gallery {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 100;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -24,7 +24,7 @@
 
 .floating {
   position: absolute;
-  left: 50%;
+  left: 75%;
   top: 50%;
   transform: translate(-50%, -50%);
   will-change: transform;
@@ -42,12 +42,12 @@
 }
 
 /* spread positions across the viewport */
-.floating:nth-child(1) { left: 8%;  top: 12%; transform: translate(-50%, -50%) scale(0.95); }
-.floating:nth-child(2) { left: 28%; top: 68%; transform: translate(-50%, -50%) scale(1.05); }
-.floating:nth-child(3) { left: 55%; top: 18%; transform: translate(-50%, -50%) scale(1.0); }
-.floating:nth-child(4) { left: 75%; top: 40%; transform: translate(-50%, -50%) scale(0.92); }
-.floating:nth-child(5) { left: 15%; top: 82%; transform: translate(-50%, -50%) scale(0.9); }
-.floating:nth-child(6) { left: 86%; top: 12%; transform: translate(-50%, -50%) scale(0.9); }
+.floating:nth-child(1) { left: 20%;  top: 12%; transform: translate(-50%, -50%) scale(0.95); }
+.floating:nth-child(2) { left: 28%; top: 30%; transform: translate(-50%, -50%) scale(1.05); }
+.floating:nth-child(3) { left: 55%; top: 30%; transform: translate(-50%, -50%) scale(1.0); }
+.floating:nth-child(4) { left: 97%; top: 18%; transform: translate(-50%, -50%) scale(0.92); }
+.floating:nth-child(5) { left: 15%; top: 90%; transform: translate(-50%, -50%) scale(0.9); }
+.floating:nth-child(6) { left: 86%; top: 60%; transform: translate(-50%, -50%) scale(0.9); }
 
 .gallery-note {
   position: absolute;
