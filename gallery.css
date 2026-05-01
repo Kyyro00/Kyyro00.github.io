@@ -63,12 +63,12 @@
 }
 
 /* spread positions across the viewport */
-.floating:nth-child(1) { left: 20%;  top: 12%; transform: translate(-50%, -50%) scale(0.95); }
-.floating:nth-child(2) { left: 28%; top: 30%; transform: translate(-50%, -50%) scale(1.05); }
+.floating:nth-child(1) { left: 20%;  top: 27%; transform: translate(-50%, -50%) scale(0.95); }
+.floating:nth-child(2) { left: 40%; top: 60%; transform: translate(-50%, -50%) scale(1.05); }
 .floating:nth-child(3) { left: 55%; top: 30%; transform: translate(-50%, -50%) scale(1.0); }
-.floating:nth-child(4) { left: 97%; top: 18%; transform: translate(-50%, -50%) scale(0.92); }
-.floating:nth-child(5) { left: 15%; top: 90%; transform: translate(-50%, -50%) scale(0.9); }
-.floating:nth-child(6) { left: 86%; top: 60%; transform: translate(-50%, -50%) scale(0.9); }
+.floating:nth-child(4) { left: 77%; top: 27%; transform: translate(-50%, -50%) scale(0.92); }
+.floating:nth-child(5) { left: 15%; top: 75%; transform: translate(-50%, -50%) scale(0.9); }
+.floating:nth-child(6) { left: 80%; top: 70%; transform: translate(-50%, -50%) scale(0.9); }
 
 .gallery-note {
   position: absolute;
@@ -132,5 +132,34 @@
   gap: 12px;
   align-items: center;
   justify-items: center;
+}
+
+/* Added visual layer without replacing the existing gallery layout */
+.floating img {
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  transition: transform 220ms ease, filter 220ms ease, box-shadow 220ms ease;
+}
+
+.floating:hover img,
+.floating:focus-visible img {
+  transform: scale(1.02);
+  filter: saturate(1.08) brightness(1.03);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.22),
+    0 0 26px rgba(255, 255, 255, 0.08);
+}
+
+.gallery-info {
+  backdrop-filter: blur(10px) saturate(120%);
+}
+
+@media (max-width: 780px) {
+  .gallery-info {
+    width: min(94vw, 640px);
+  }
+
+  .floating img {
+    max-height: 28vh;
+  }
 }
 

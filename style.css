@@ -7,9 +7,10 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: #8BDEDA;  /* fallback for old browsers */
-  background-image: linear-gradient(to left bottom, #5e0036, #531c4c, #432e5a, #333a5f, #2b435e, #2a435e, #29425d, #28425d, #2d395e, #3a2d5a, #491c4e, #55003b);
-  color: white;
+  background: #ffffff;
+  color: #000000;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
 }
 
 /* Navbar */
@@ -31,7 +32,7 @@ body {
   top: 0;
   width: 100%;
   height: calc(var(--nav-lock-enabled) * 100%);
-  background: rgba(8, 8, 12, 0.84);
+  background: rgba(0, 0, 0, 0.84);
   z-index: 1100;
   cursor: not-allowed;
 }
@@ -70,7 +71,7 @@ body {
 }
 
 .navbar-logo:hover {
-  color: #a200ff;
+  color: #494949;
 }
 
 .nav-menu {
@@ -88,13 +89,61 @@ body {
 }
 
 .nav-link:hover {
-  background: rgba(54, 0, 90, 0.719);
-  border-bottom-color: #49005f;
+  background: rgba(49, 49, 49, 0.719);
+  border-bottom-color: #464646;
 }
 
 .nav-link.active {
-  border-bottom-color: #ff00ff;
-  color: #6500a0;
+  border-bottom-color: #cfcfcf;
+  color: #ffffff;
+}
+
+/* Added page-button styling without changing other elements */
+.nav-link {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(0, 198, 255, 0.12));
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.nav-link:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(80, 79, 79, 0.22), rgba(0, 198, 255, 0.22));
+  border-color: rgba(255, 255, 255, 0.671);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.24),
+    0 0 20px rgba(51, 51, 51, 0.18),
+    inset 0 1px 0 rgba(0, 0, 0, 0.16);
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(162, 0, 255, 0.24));
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.22),
+    0 0 18px rgba(56, 56, 56, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+}
+
+@media (max-width: 840px) {
+  .nav-link {
+    border-radius: 999px;
+  }
 }
 
 .hero {
@@ -109,10 +158,12 @@ body {
 h1 {
   font-size: 6rem;
   text-align: center;
+  color: #000000;
 }
 
-.subtitulo {
-  opacity: 0;
+p {
+  opacity: 100;
+  color: #000000;
   animation: aparecer 1s 0.5s forwards;
 }
 
@@ -121,7 +172,7 @@ button {
   margin-top: 20px;
   padding: 10px 20px;
   border: none;
-  background: #00c6ff;
+  background: #000000;
   color: white;
   border-radius: 10px;
   cursor: pointer;
@@ -130,7 +181,7 @@ button {
 
 button:hover {
   transform: scale(1.1);
-  background: #0072ff;
+  background: #646464;
 }
 
 .normal-text {
@@ -204,7 +255,7 @@ button:hover {
 
 .project-card {
   background: rgba(0, 0, 0, 0.2);
-  border-left: 4px solid #00c6ff;
+  border-left: 4px solid #2b2b2b;
   padding: 1.5rem;
   margin: 1.5rem 0;
   border-radius: 5px;
@@ -213,12 +264,12 @@ button:hover {
 
 .project-card:hover {
   transform: translateX(10px);
-  box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(39, 39, 39, 0.3);
 }
 
 .project-card h3 {
   margin-top: 0;
-  color: #00c6ff;
+  color: #242424;
 }
 
 .contact-item {
@@ -226,7 +277,7 @@ button:hover {
   padding: 1.5rem;
   margin: 1rem 0;
   border-radius: 5px;
-  border-left: 4px solid #00c6ff;
+  border-left: 4px solid #181818;
 }
 
 .contact-item h3 {
@@ -261,5 +312,29 @@ button:hover {
     opacity: 1;
     transform: translateY(0) scale(1);
     filter: blur(0);
+  }
+}
+
+/* Added visual layer without replacing existing layout */
+.navbar::after {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nav-link,
+.navbar-logo,
+.gallery-info,
+.floating img {
+  transform-origin: center;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 840px) {
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
