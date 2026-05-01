@@ -52,7 +52,7 @@ Write-Output "Número de archivos: $($files.Count)"
 Write-Output "===================================="
 Write-Output ""
 
-Write-Output "Página actualizada. Tiempo restante para ver el cambio:"
+Write-Output "Pagina actualizada. Tiempo restante para ver el cambio:"
 for ($remaining = 120; $remaining -ge 1; $remaining--) {
   Write-Host ("Tiempo restante: {0} segundos" -f $remaining) -NoNewline
   Start-Sleep -Seconds 1

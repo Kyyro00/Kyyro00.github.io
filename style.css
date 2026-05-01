@@ -4,8 +4,63 @@ body {
   background: #8BDEDA;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #EF9393, #E17DC2, #998EE0, #43ADD0, #8BDEDA);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #EF9393, #E17DC2, #998EE0, #43ADD0, #8BDEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
   color: white;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00c6ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-logo:hover {
+  color: #00e5ff;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  background: rgba(0, 198, 255, 0.2);
+  border-bottom-color: #00c6ff;
+}
+
+.nav-link.active {
+  border-bottom-color: #00c6ff;
+  color: #00c6ff;
 }
 
 .hero {
@@ -64,6 +119,86 @@ button:hover {
 
 .reveal-text.is-visible {
   animation: revealText 650ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Content section */
+.content {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.content h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.content li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.content li:before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #00c6ff;
+}
+
+.project-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #00c6ff;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateX(10px);
+  box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+}
+
+.project-card h3 {
+  margin-top: 0;
+  color: #00c6ff;
+}
+
+.contact-item {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  border-left: 4px solid #00c6ff;
+}
+
+.contact-item h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
 }
 
 /* Keyframes */
