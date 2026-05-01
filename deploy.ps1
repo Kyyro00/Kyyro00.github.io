@@ -40,6 +40,18 @@ if ($LASTEXITCODE -ne 0) {
 Write-Output "Despliegue completado. Abriendo site..."
 Start-Process "https://Kyyro00.github.io"
 
+$files = Get-ChildItem -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notlike "*\.git*" -and $_.FullName -notlike "*\node_modules*" }
+$totalSize = ($files | Measure-Object -Property Length -Sum).Sum
+$totalSizeMB = [math]::Round($totalSize / 1MB, 2)
+$totalSizeKB = [math]::Round($totalSize / 1KB, 2)
+
+Write-Output ""
+Write-Output "===== Estadísticas del sitio ====="
+Write-Output "Peso total: $($totalSizeMB) MB ($($totalSizeKB) KB)"
+Write-Output "Número de archivos: $($files.Count)"
+Write-Output "===================================="
+Write-Output ""
+
 Write-Output "Página actualizada. Tiempo restante para ver el cambio:"
 for ($remaining = 120; $remaining -ge 1; $remaining--) {
   Write-Host ("Tiempo restante: {0} segundos" -f $remaining) -NoNewline
