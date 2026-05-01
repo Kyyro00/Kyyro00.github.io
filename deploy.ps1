@@ -9,7 +9,7 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
   exit 1
 }
 
-$defaultMsg = "Site update"
+$defaultMsg = "Actualizacion de sitio"
 $msg = Read-Host "Mensaje de commit (Enter para '$defaultMsg')"
 if ([string]::IsNullOrWhiteSpace($msg)) { $msg = $defaultMsg }
 
@@ -40,7 +40,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Output "Despliegue completado. Abriendo site..."
 Start-Process "https://Kyyro00.github.io"
 
-Write-Output "La página ya se actualizó. Tiempo restante para ver el cambio:"
+Write-Output "Página actualizada. Tiempo restante para ver el cambio:"
 for ($remaining = 120; $remaining -ge 1; $remaining--) {
   Write-Host ("Tiempo restante: {0} segundos" -f $remaining) -NoNewline
   Start-Sleep -Seconds 1
