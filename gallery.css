@@ -102,6 +102,13 @@
   border-radius: 12px;
   padding: 0.75rem 1rem;
   z-index: 4;
+  --animate-duration: 320ms;
+}
+
+.gallery-info.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .gallery-info h3 {

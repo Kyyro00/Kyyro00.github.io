@@ -14,6 +14,7 @@
   }));
   const infoTitle = document.getElementById('galleryInfoTitle');
   const infoText = document.getElementById('galleryInfoText');
+  const infoPanel = document.getElementById('galleryInfo');
   let infoHideTimer = null;
   let rafId = null;
 
@@ -57,6 +58,19 @@
 
       el.addEventListener('animationend', handleFadeOutEnd, { once: true });
     });
+
+    if (infoPanel && !infoPanel.classList.contains('is-hidden')) {
+      infoPanel.classList.remove('animate__fadeIn');
+      infoPanel.classList.add('animate__animated', 'animate__fadeOut');
+
+      const handlePanelFadeOutEnd = () => {
+        infoPanel.removeEventListener('animationend', handlePanelFadeOutEnd);
+        infoPanel.classList.remove('animate__fadeOut');
+        infoPanel.classList.add('is-hidden');
+      };
+
+      infoPanel.addEventListener('animationend', handlePanelFadeOutEnd, { once: true });
+    }
   }
 
   // state
@@ -146,13 +160,26 @@
   floats.forEach((el) => {
     const setInfo = () => {
       if (!infoTitle || !infoText) return;
+
+      if (infoPanel) {
+        infoPanel.classList.remove('is-hidden', 'animate__fadeOut');
+        infoPanel.classList.add('animate__animated', 'animate__fadeIn');
+
+        const handlePanelFadeInEnd = () => {
+          infoPanel.removeEventListener('animationend', handlePanelFadeInEnd);
+          infoPanel.classList.remove('animate__fadeIn');
+        };
+
+        infoPanel.addEventListener('animationend', handlePanelFadeInEnd, { once: true });
+      }
+
       swapWithFade(infoTitle, el.dataset.title || 'Imagen');
       swapWithFade(infoText, el.dataset.description || 'Sin descripcion disponible.');
 
       if (infoHideTimer) clearTimeout(infoHideTimer);
       infoHideTimer = setTimeout(() => {
         hideInfoWithFade();
-      }, 10000);
+      }, 5000);
     };
 
     el.addEventListener('click', setInfo);
