@@ -3,7 +3,8 @@ body {
 	font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 2rem;
-	background: #000000;
+	background: #2A7B9B;
+	background: linear-gradient(167deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
 	color: #84009e;
 	text-align: center;
 }
@@ -14,12 +15,3 @@ h1 {
 	font-size: 8rem;
 	margin: 0 0 0.5rem 0;
 }
-
-p {
-	max-width: 720px;
-	margin: 0.5rem auto;
-	font-size: 1.05rem;
-	line-height: 1.6;
-	color: #0062ff;
-}
-
