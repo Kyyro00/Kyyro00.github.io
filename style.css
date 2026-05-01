@@ -17,8 +17,8 @@ body {
 }
 
 /* Animación de entrada */
-.titulo {
-  font-size: 4rem;
+.h1 {
+  font-size: 5rem;
   text-align: center;
   opacity: 0;
   transform: translateY(-50px);
